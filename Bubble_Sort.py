@@ -1,4 +1,7 @@
+import time
+
 def bubble_sort(lista):
+    start = time.perf_counter()  # início da medição de tempo
     n = len(lista)
     comparacoes = 0
     trocas = 0
@@ -16,7 +19,9 @@ def bubble_sort(lista):
         if not houve_troca:  # otimização: para cedo se já estiver ordenado
             break
 
-    return comparacoes, trocas
+    end = time.perf_counter()  # fim da medição
+    tempo_ms = (end - start) * 1000.0
+    return comparacoes, trocas, tempo_ms
 
 def converter_entrada(texto):
     return list(map(int, texto.replace(",", " ").split()))
@@ -25,8 +30,9 @@ def converter_entrada(texto):
 entrada = input("Cole os números (ex: 1,2,3,1,23,4): ")
 lista = converter_entrada(entrada)
 
-comparacoes, trocas = bubble_sort(lista)
+comparacoes, trocas, tempo_ms = bubble_sort(lista)
 
 print("Lista ordenada:", lista)
 print(f"Comparações: {comparacoes}")
 print(f"Trocas: {trocas}")
+print(f"Tempo (ms): {tempo_ms:.3f}")
